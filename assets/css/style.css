@@ -26,15 +26,6 @@ body {
   padding-bottom: 1rem;
 }
 
-.description {
-  white-space: pre-wrap;
-}
-
-.time-block {
-  text-align: center;
-  border-radius: 15px;
-}
-
 .clear-btn-container {
   margin-top: 1rem;
 }
@@ -76,6 +67,7 @@ body {
   border-top: dashed 1px #b6b4b4;
 }
 
+/* Group selector for hour-container and btn-container */
 .btn-container,
 .hour-container {
   background-color: whitesmoke;
@@ -196,7 +188,12 @@ body {
 
   .btn-container {
     flex-direction: row;
-    padding-top: 00.5rem;
+    padding-top: 0.2rem;
+    border-radius: 0rem;
+  }
+
+  .textarea-container {
+    box-shadow: none;
   }
 
   .save-btn {
