@@ -27,7 +27,7 @@ const renderCurrentDay = function () {
   const date = moment();
   //
   const getCurrentDay = function () {
-    currentDay.text(moment().format("MMMM Do YYYY"));
+    currentDay.text(moment().format("dddd MMMM Do YYYY"));
   };
   currentDay.text(getCurrentDay);
 };
