@@ -11,6 +11,7 @@ const timeBlockLabels = [
 ];
 
 const currentDay = $("#current-day");
+const clockContainer = $("#clock");
 
 const constructTimeBlock = function () {
   //get text from object
@@ -25,18 +26,31 @@ const renderTimeBlocks = function () {
 const renderCurrentDay = function () {
   //get current date
   const date = moment();
-  //
+  //format the date
   const getCurrentDay = function () {
     currentDay.text(moment().format("dddd MMMM Do YYYY"));
   };
   currentDay.text(getCurrentDay);
 };
 
+const renderClock = function () {
+  const setClock = function () {
+    //get current time
+    const hourTime = moment();
+    const hourTimeFormatted = hourTime.format("kk:mm:ss");
+
+    clockContainer.text(hourTimeFormatted);
+  };
+  const timer = setInterval(setClock, 1000);
+};
+
 const onReady = function () {
   renderCurrentDay();
+
+  renderClock();
 
   renderTimeBlocks();
 };
 
 $(document).ready(onReady);
-console.log(currentDay);
+console.log(clockContainer);
