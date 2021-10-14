@@ -10,6 +10,8 @@ const timeBlockLabels = [
   { label: "5 AM", key: 17 },
 ];
 
+const currentDay = $("#current-day");
+
 const constructTimeBlock = function () {
   //get text from object
   //check if present
@@ -20,16 +22,20 @@ const renderTimeBlocks = function () {
   //map over the timeBlockLabels[] (constructTimeBlock)
 };
 
-const renderCurrentDay = function () {};
+const renderCurrentDay = function () {
+  //get current date
+  const date = moment();
+  const getCurrentDay = function (date) {
+    currentDay.textContent = date.format("dddd MMMM Do YYYY");
+  };
+  currentDay.textContent = getCurrentDay();
+};
 
-const getCurrentDay = function () {};
-
-const onLoad = function () {
-  getCurrentDay();
-
+const onReady = function () {
   renderCurrentDay();
 
   renderTimeBlocks();
 };
 
-$(window).load(onLoad);
+$(document).ready(onReady);
+console.log(currentDay);
