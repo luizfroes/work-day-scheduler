@@ -25,11 +25,11 @@ const renderTimeBlocks = function () {
 const renderCurrentDay = function () {
   //get current date
   const date = moment();
-  console.log(date.format("dddd MMMM Do YYYY"));
-  const getCurrentDay = function (date) {
-    currentDay.textContent = date.format("MMMM Do YYYY");
+  //
+  const getCurrentDay = function () {
+    currentDay.text(moment().format("MMMM Do YYYY"));
   };
-  currentDay.textContent = getCurrentDay();
+  currentDay.text(getCurrentDay);
 };
 
 const onReady = function () {
