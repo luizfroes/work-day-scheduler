@@ -26,20 +26,30 @@ const getFromLocalStorage = function (key, defaultValue) {
 };
 
 const constructTimeBlock = function (each) {
-  const currentTime = 12;
-  const isPresent = function () {
-    each.key === currentTime;
-  };
+  //get text from LS object
+  //getFromLocalStorage();
 
-  const isFuture = function () {
-    each.key > currentTime;
-  };
+  const currentTime = moment().format("HH");
+
+  const isPast = currentTime > each.key;
+  const isFuture = currentTime < each.key;
+
+  let textareaClass;
+
+  // check if is past, future or present
+  if (isPast) {
+    textareaClass = "textarea-container";
+  } else if (isFuture) {
+    textareaClass = "textarea-future";
+  } else {
+    textareaClass = "textarea-present";
+  }
 
   const timeBlock = `<div class="card-container" id="card-container">
   <div class="hour-container">
     <h2 class="hour">${each.label}</h2>
   </div>
-  <div class="textarea-container">
+  <div class="${textareaClass}">
     <textarea class="textarea" id="textarea"></textarea>
   </div>
   <div class="btn-container">
@@ -54,16 +64,7 @@ const constructTimeBlock = function (each) {
   //get text from LS object
   //getFromLocalStorage();
 
-  //check if present
-  if (isPresent) {
-    $("#textarea-container").toggleClass("textarea-present");
-  }
-
-  //check if future
-  if (isFuture) {
-    $("#textarea-container").toggleClass("textarea-future");
-  }
-  return console.log(timeBlock);
+  return timeBlock;
 };
 
 const renderTimeBlocks = function () {
