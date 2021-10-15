@@ -12,7 +12,6 @@ const timeBlockLabels = [
 
 const currentDay = $("#current-day");
 const clockContainer = $("#clock");
-const timeBlockContainer = $("#time-block-container");
 
 const getFromLocalStorage = function (key, defaultValue) {
   const localStorageData = JSON.parse(localStorage.getItem(key));
@@ -34,10 +33,10 @@ const onSave = function (event) {
 };
 
 const onDelete = function (event) {
-  const target = $(event.target.attr("data"));
+  const target = $(event.target);
 
   if (target.is("#clear-btn")) {
-    console.log(target.attr("data"));
+    console.log(target);
   }
 };
 
@@ -74,8 +73,14 @@ const constructTimeBlock = function (each) {
   </div>
 </div>`;
 
+  //add a event listener click to save
+  $("#time-block-container").on("click", onSave);
+
+  //add a event listener click to delete
+  $("#time-block-container").on("click", onDelete);
+
   //append to main
-  $(timeBlock).appendTo(timeBlockContainer);
+  $(timeBlock).appendTo("#time-block-container");
 
   //get text from LS object
   //getFromLocalStorage();
@@ -116,11 +121,5 @@ const onReady = function () {
 
   renderTimeBlocks();
 };
-
-//add a event listener click to save
-$("#btn-container").on("click", onSave);
-
-//add a event listener click to delete
-$("#btn-container").on("click", onDelete);
 
 $(document).ready(onReady);
