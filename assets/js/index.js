@@ -12,6 +12,7 @@ const timeBlockLabels = [
 
 const currentDay = $("#current-day");
 const clockContainer = $("#clock");
+const saveBtn = $("#save-btn");
 
 const getFromLocalStorage = function (key, defaultValue) {
   const localStorageData = JSON.parse(localStorage.getItem(key));
@@ -25,19 +26,12 @@ const getFromLocalStorage = function (key, defaultValue) {
 };
 
 const onSave = function (event) {
-  const target = $(event.target);
-
-  if (target.is("#save-btn")) {
-    console.log(target);
-  }
+  console.log(event);
 };
+//console.log($(saveBtn).attr("data"));
 
 const onDelete = function (event) {
-  const target = $(event.target);
-
-  if (target.is("#clear-btn")) {
-    console.log(target);
-  }
+  console.log(event);
 };
 
 const constructTimeBlock = function (each) {
@@ -68,16 +62,16 @@ const constructTimeBlock = function (each) {
     <textarea class="textarea" id="textarea"></textarea>
   </div>
   <div id="btn-container" class="btn-container">
-    <button id="save-btn" class="save-btn"><i class="far fa-save" data="${each.key}"></i></i></button>
-    <button id="clear-btn" class="clear-btn"><i class="far fa-trash-alt"></i></button>
+    <button id="save-btn" class="save-btn"><i class="far fa-save" data="${each.key}" onclick="onSave({each.key})"></i></i></button>
+    <button id="clear-btn" class="clear-btn"><i class="far fa-trash-alt" data="${each.key}" onclick="onDelete({each.key})"></i></button>
   </div>
 </div>`;
 
   //add a event listener click to save
-  $("#time-block-container").on("click", onSave);
+  //$("#time-block-container").on("click", onSave);
 
   //add a event listener click to delete
-  $("#time-block-container").on("click", onDelete);
+  //$("#time-block-container").on("click", onDelete);
 
   //append to main
   $(timeBlock).appendTo("#time-block-container");
