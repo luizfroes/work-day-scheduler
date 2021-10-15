@@ -25,6 +25,22 @@ const getFromLocalStorage = function (key, defaultValue) {
   }
 };
 
+const onSave = function (event) {
+  const target = $(event.target);
+
+  if (target.is("#save-btn")) {
+    console.log(target);
+  }
+};
+
+const onDelete = function (event) {
+  const target = $(event.target.attr("data"));
+
+  if (target.is("#clear-btn")) {
+    console.log(target.attr("data"));
+  }
+};
+
 const constructTimeBlock = function (each) {
   //get text from LS object
   //getFromLocalStorage();
@@ -52,9 +68,9 @@ const constructTimeBlock = function (each) {
   <div class="${textareaClass}">
     <textarea class="textarea" id="textarea"></textarea>
   </div>
-  <div class="btn-container">
-    <button class="save-btn"><i class="far fa-save"></i></i></button>
-    <button class="clear-btn"><i class="far fa-trash-alt"></i></button>
+  <div id="btn-container" class="btn-container">
+    <button id="save-btn" class="save-btn"><i class="far fa-save" data="${each.key}"></i></i></button>
+    <button id="clear-btn" class="clear-btn"><i class="far fa-trash-alt"></i></button>
   </div>
 </div>`;
 
@@ -100,5 +116,11 @@ const onReady = function () {
 
   renderTimeBlocks();
 };
+
+//add a event listener click to save
+$("#btn-container").on("click", onSave);
+
+//add a event listener click to delete
+$("#btn-container").on("click", onDelete);
 
 $(document).ready(onReady);

@@ -65,6 +65,7 @@ body {
 
 .hour-container {
   border-top: dashed 1px #b6b4b4;
+  max-width: 6.5rem;
 }
 
 /* Group selector for hour-container and btn-container */
@@ -190,6 +191,10 @@ body {
     flex-direction: row;
     padding-top: 0.2rem;
     border-radius: 0rem;
+  }
+
+  .hour-container {
+    max-width: none;
   }
 
   .textarea-container {
