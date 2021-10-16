@@ -1,18 +1,20 @@
 const timeBlockLabels = [
-  { label: "9 AM", key: 9 },
-  { label: "10 AM", key: 10 },
-  { label: "11 AM", key: 11 },
-  { label: "12 PM", key: 12 },
-  { label: "1 PM", key: 13 },
-  { label: "2 PM", key: 14 },
-  { label: "3 PM", key: 15 },
-  { label: "4 PM", key: 16 },
-  { label: "5 PM", key: 17 },
+  { label: "9 AM", key: 9, textInput: "" },
+  { label: "10 AM", key: 10, textInput: "" },
+  { label: "11 AM", key: 11, textInput: "" },
+  { label: "12 PM", key: 12, textInput: "" },
+  { label: "1 PM", key: 13, textInput: "" },
+  { label: "2 PM", key: 14, textInput: "" },
+  { label: "3 PM", key: 15, textInput: "" },
+  { label: "4 PM", key: 16, textInput: "" },
+  { label: "5 PM", key: 17, textInput: "" },
 ];
 
 const currentDay = $("#current-day");
 const clockContainer = $("#clock");
 const saveBtn = $("#save-btn");
+
+let textAreaContent = $("#textarea");
 
 const getFromLocalStorage = function (key, defaultValue) {
   const localStorageData = JSON.parse(localStorage.getItem(key));
@@ -26,11 +28,12 @@ const getFromLocalStorage = function (key, defaultValue) {
 };
 
 const onSave = function (event) {
-  console.log(event);
+  const timeData = { key: event, textInput: $("#textarea").val() };
+  return console.log(timeData);
 };
 
 const onDelete = function (event) {
-  console.log(event);
+  //const clearTimeData = {key: event,textInput: ($("#textarea").innerHTML = "")}
 };
 
 const constructTimeBlock = function (each) {
@@ -66,19 +69,8 @@ const constructTimeBlock = function (each) {
   </div>
 </div>`;
 
-  //add a event listener click to save
-  //$("#time-block-container").on("click", onSave);
-
-  //add a event listener click to delete
-  //$("#time-block-container").on("click", onDelete);
-
   //append to main
   $(timeBlock).appendTo("#time-block-container");
-
-  //get text from LS object
-  //getFromLocalStorage();
-
-  return timeBlock;
 };
 
 const renderTimeBlocks = function () {
