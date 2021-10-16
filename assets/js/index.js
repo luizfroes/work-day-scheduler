@@ -67,16 +67,16 @@ const constructTimeBlock = function (each) {
   checkIfPastPresentFuture(each);
 
   timeBlock(each, textareaClass);
-
-  console.log(each);
 };
 
 const renderTimeBlocks = function (timeBlockLabels) {
   constructTimeBlock(each);
-  //map over the timeBlockLabels[] (constructTimeBlock)
-  //const timeBlocks =
-  timeBlockLabels.map(constructTimeBlock);
-  //console.log(timeBlocks);
+
+  timeBlockLabels.forEach((timeBlock) => {
+    constructTimeBlock(timeBlock);
+  });
+
+  console.log(timeBlock);
 };
 
 const renderCurrentDay = function () {
