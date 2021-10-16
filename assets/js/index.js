@@ -14,6 +14,8 @@ const currentDay = $("#current-day");
 const clockContainer = $("#clock");
 const saveBtn = $("#save-btn");
 
+let textareaClass = "";
+
 const getFromLocalStorage = function (key, defaultValue) {
   const localStorageData = JSON.parse(localStorage.getItem(key));
   //console.log(localStorageData);
@@ -25,24 +27,11 @@ const getFromLocalStorage = function (key, defaultValue) {
   }
 };
 
-const onSave = function (event) {
-  console.log(event);
-};
-
-const onDelete = function (event) {
-  console.log(event);
-};
-
-const constructTimeBlock = function (each) {
-  //get text from LS object
-  //getFromLocalStorage();
-
+const checkIfPastPresentFuture = function (each) {
   const currentTime = moment().format("HH");
 
   const isPast = currentTime > each.key;
   const isFuture = currentTime < each.key;
-
-  let textareaClass;
 
   // check if is past, future or present
   if (isPast) {
@@ -52,38 +41,42 @@ const constructTimeBlock = function (each) {
   } else {
     textareaClass = "textarea-present";
   }
+  return textareaClass;
+};
 
-  const timeBlock = `<div class="card-container" id="card-container">
-  <div class="hour-container">
-    <h2 class="hour">${each.label}</h2>
-  </div>
-  <div class="${textareaClass}">
-    <textarea class="textarea" id="textarea"></textarea>
-  </div>
-  <div id="btn-container" class="btn-container">
-    <button id="save-btn" class="save-btn"><i class="far fa-save" data="${each.key}" onclick="onSave(${each.key})"></i></i></button>
-    <button id="clear-btn" class="clear-btn"><i class="far fa-trash-alt" data="${each.key}" onclick="onDelete(${each.key})"></i></button>
-  </div>
+const timeBlock = function (each, textareaClass) {
+  return `<div class="card-container" id="time-card-container">
+<div class="hour-container">
+  <h2 class="hour">${each.label}</h2>
+</div>
+<div class="${textareaClass}">
+  <textarea class="textarea" id="textarea"></textarea>
+</div>
+<div id="btn-container" class="btn-container">
+  <button id="save-btn" class="save-btn"><i class="far fa-save" data="${each.key}" onclick="onSave(${each.key})"></i></i></button>
+  <button id="clear-btn" class="clear-btn"><i class="far fa-trash-alt" data="${each.key}" onclick="onDelete(${each.key})"></i></button>
+</div>
 </div>`;
+};
 
-  //add a event listener click to save
-  //$("#time-block-container").on("click", onSave);
-
-  //add a event listener click to delete
-  //$("#time-block-container").on("click", onDelete);
-
-  //append to main
-  $(timeBlock).appendTo("#time-block-container");
-
+const constructTimeBlock = function (each) {
   //get text from LS object
   //getFromLocalStorage();
 
-  return timeBlock;
+  // check if is past, future or present
+  checkIfPastPresentFuture(each);
+
+  timeBlock(each, textareaClass);
+
+  console.log(each);
 };
 
-const renderTimeBlocks = function () {
+const renderTimeBlocks = function (timeBlockLabels) {
+  constructTimeBlock(each);
   //map over the timeBlockLabels[] (constructTimeBlock)
+  //const timeBlocks =
   timeBlockLabels.map(constructTimeBlock);
+  //console.log(timeBlocks);
 };
 
 const renderCurrentDay = function () {
@@ -114,5 +107,19 @@ const onLoad = function () {
 
   renderTimeBlocks();
 };
+
+const onSave = function (event) {
+  console.log(event);
+};
+
+const onDelete = function (event) {
+  console.log(event);
+};
+
+//add a event listener click to save
+//$("#time-block-container").on("click", onSave);
+
+//add a event listener click to delete
+//$("#time-block-container").on("click", onDelete);
 
 window.addEventListener("load", onLoad);
