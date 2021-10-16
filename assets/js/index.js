@@ -45,7 +45,7 @@ const checkIfPastPresentFuture = function (each) {
 };
 
 const timeBlock = function (each, textareaClass) {
-  return `<div class="card-container" id="time-card-container">
+  const timeBlockDiv = `<div class="card-container" id="time-card-container">
 <div class="hour-container">
   <h2 class="hour">${each.label}</h2>
 </div>
@@ -57,24 +57,33 @@ const timeBlock = function (each, textareaClass) {
   <button id="clear-btn" class="clear-btn"><i class="far fa-trash-alt" data="${each.key}" onclick="onDelete(${each.key})"></i></button>
 </div>
 </div>`;
+  return timeBlockDiv;
 };
 
 const constructTimeBlock = function (each) {
   //get text from LS object
-  //getFromLocalStorage();
+  getFromLocalStorage();
 
   // check if is past, future or present
   checkIfPastPresentFuture(each);
 
+  //construct timeBlockDiv
   timeBlock(each, textareaClass);
+  console.log(each, textareaClass);
 };
 
-const renderTimeBlocks = function (timeBlockLabels) {
-  timeBlockLabels.forEach((timeBlock) => {
+//iterate over the timeBlockLabels array
+const renderTimeBlocks = function () {
+  //iterate over the timeBlockLabels array
+  const timeBlocks = timeBlockLabels.map((timeBlock) => {
     constructTimeBlock(timeBlock);
   });
+  //console.log();
 
-  console.log(timeBlock);
+  //append to main
+  $().append("#time-block-container");
+
+  console.log($("#time-card-container"));
 };
 
 const renderCurrentDay = function () {
