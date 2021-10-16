@@ -35,7 +35,7 @@ const onDelete = function (event) {
 
 const constructTimeBlock = function (each) {
   //get text from LS object
-  //getFromLocalStorage();
+  const textInput = getFromLocalStorage("textInput", []);
 
   const currentTime = moment().format("HH");
 
@@ -61,8 +61,8 @@ const constructTimeBlock = function (each) {
     <textarea class="textarea" id="textarea"></textarea>
   </div>
   <div id="btn-container" class="btn-container">
-    <button id="save-btn" class="save-btn"><i class="far fa-save" data="${each.key}" onclick="onSave(${each.key})"></i></i></button>
-    <button id="clear-btn" class="clear-btn"><i class="far fa-trash-alt" data="${each.key}" onclick="onDelete(${each.key})"></i></button>
+    <button onclick="onSave(${each.key})" id="save-btn" class="save-btn"><i class="far fa-save" data="${each.key}"></i></i></button>
+    <button onclick="onSave(${each.key})" id="clear-btn" class="clear-btn"><i class="far fa-trash-alt" data="${each.key}"></i></button>
   </div>
 </div>`;
 
@@ -115,4 +115,4 @@ const onLoad = function () {
   renderTimeBlocks();
 };
 
-window.addEventListener("load", onLoad);
+$(window).on("load", onLoad);
