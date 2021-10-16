@@ -70,8 +70,6 @@ const constructTimeBlock = function (each) {
 };
 
 const renderTimeBlocks = function (timeBlockLabels) {
-  constructTimeBlock(each);
-
   timeBlockLabels.forEach((timeBlock) => {
     constructTimeBlock(timeBlock);
   });
