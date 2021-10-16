@@ -27,11 +27,11 @@ const getFromLocalStorage = function (key, defaultValue) {
   }
 };
 
-const checkIfPastPresentFuture = function (each) {
+const checkIfPastPresentFuture = function (timeBlock) {
   const currentTime = moment().format("HH");
 
-  const isPast = currentTime > each.key;
-  const isFuture = currentTime < each.key;
+  const isPast = currentTime > timeBlock.key;
+  const isFuture = currentTime < timeBlock.key;
 
   // check if is past, future or present
   if (isPast) {
@@ -44,32 +44,31 @@ const checkIfPastPresentFuture = function (each) {
   return textareaClass;
 };
 
-const timeBlock = function (each, textareaClass) {
-  const timeBlockDiv = `<div class="card-container" id="time-card-container">
+const timeBlocks = function (timeBlock, textareaClass) {
+  return `<div class="card-container" id="time-card-container">
 <div class="hour-container">
-  <h2 class="hour">${each.label}</h2>
+  <h2 class="hour">${timeBlock.label}</h2>
 </div>
 <div class="${textareaClass}">
   <textarea class="textarea" id="textarea"></textarea>
 </div>
 <div id="btn-container" class="btn-container">
-  <button id="save-btn" class="save-btn"><i class="far fa-save" data="${each.key}" onclick="onSave(${each.key})"></i></i></button>
-  <button id="clear-btn" class="clear-btn"><i class="far fa-trash-alt" data="${each.key}" onclick="onDelete(${each.key})"></i></button>
+  <button id="save-btn" class="save-btn"><i class="far fa-save" data="${timeBlock.key}" onclick="onSave(${timeBlock.key})"></i></i></button>
+  <button id="clear-btn" class="clear-btn"><i class="far fa-trash-alt" data="${timeBlock.key}" onclick="onDelete(${timeBlock.key})"></i></button>
 </div>
 </div>`;
-  return timeBlockDiv;
 };
 
-const constructTimeBlock = function (each) {
+const constructTimeBlock = function (timeBlock) {
   //get text from LS object
   getFromLocalStorage();
 
   // check if is past, future or present
-  checkIfPastPresentFuture(each);
+  checkIfPastPresentFuture(timeBlock);
 
   //construct timeBlockDiv
-  timeBlock(each, textareaClass);
-  console.log(each, textareaClass);
+  timeBlocks(timeBlock, textareaClass);
+  console.log(timeBlock, textareaClass, $("#time-card-container"));
 };
 
 //iterate over the timeBlockLabels array
