@@ -63,16 +63,16 @@ const constructTimeBlock = function (each) {
   //append to main
   $(timeBlock).appendTo("#time-block-container");
 
-  const textareaInput = function (item) {
-    console.log(item.key, $("#textarea").data());
-    // if (item.key === $("#textarea").data()) {
-    //   $("#textarea").val(item.textInput);
-    //   console.log(item.key, $("#textarea").data());
-    //   return;
-    //}
-  };
+  // const textareaInput = function (item) {
+  //   console.log(item.key, $("#textarea").data());
+  //   // if (item.key === $("#textarea").data()) {
+  //   //   $("#textarea").val(item.textInput);
+  //   //   console.log(item.key, $("#textarea").data());
+  //   //   return;
+  //   //}
+  // };
 
-  textInputArray.map(textareaInput);
+  // textInputArray.map(textareaInput);
 };
 
 const renderTimeBlocks = function () {
