@@ -31,8 +31,19 @@ const onSave = function (event) {
   const target = $(event.target);
 
   if (target.is('button[name="save-btn"]', 'i[name="save-btn"]')) {
-    const timeData = { key: event, textInput: $("#textarea").val() };
-    console.log(timeData);
+    const timeData = {
+      key: target.attr("data-key"),
+      textInput: $("#textarea").val(),
+    };
+
+    //add to LS
+    const textInput = getFromLocalStorage("textInput", []);
+
+    textInput.push(timeData);
+
+    console.log(textInput);
+
+    localStorage.setItem("textInput", JSON.stringify(timeData));
   }
 };
 
@@ -72,8 +83,8 @@ const constructTimeBlock = function (each) {
     <textarea class="textarea" id="textarea"></textarea>
   </div>
   <div id="btn-container" class="btn-container">
-    <button name="save-btn" id="save-btn" class="save-btn" data="${each.key}"><i name="save-icon" class="far fa-save" data="${each.key}"></i></i></button>
-    <button name="clear-btn" id="clear-btn" class="clear-btn" data="${each.key}"><i name="clear-icon" class="far fa-trash-alt" data="${each.key}"></i></button>
+    <button name="save-btn" id="save-btn" class="save-btn" data-key="${each.key}"><i name="save-icon" class="far fa-save" data="${each.key}"></i></i></button>
+    <button name="clear-btn" id="clear-btn" class="clear-btn" data-key="${each.key}"><i name="clear-icon" class="far fa-trash-alt" data="${each.key}"></i></button>
   </div>
 </div>`;
 
