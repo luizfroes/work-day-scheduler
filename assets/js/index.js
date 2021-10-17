@@ -46,14 +46,6 @@ const onSave = function (event) {
   }
 };
 
-const onClear = function (event) {
-  const target = $(event.target);
-
-  if (target.is('button[name="clear-btn"]', 'i[name="save-btn"]')) {
-    $("#textarea").val("");
-  }
-};
-
 const addTextInput = function (timeData) {
   if (timeData.key === $("#textarea").data()) {
     $("#textarea").text(timeData.textInput);
@@ -95,7 +87,6 @@ const constructTimeBlock = function (each, textInputArray, timeData) {
   </div>
   <div id="btn-container" class="btn-container">
     <button name="save-btn" id="save-btn" class="save-btn" data-key="${each.key}"><i name="save-icon" class="far fa-save" data="${each.key}"></i></i></button>
-    <button name="clear-btn" id="clear-btn" class="clear-btn" data-key="${each.key}"><i name="clear-icon" class="far fa-trash-alt" data="${each.key}"></i></button>
   </div>
 </div>`;
 
@@ -110,8 +101,6 @@ const renderTimeBlocks = function () {
 
 // add a event listener click to save
 $("#time-block-container").on("click", onSave);
-
-$("#time-block-container").on("click", onClear);
 
 const renderCurrentDay = function () {
   //get current date
