@@ -28,6 +28,8 @@ const onSave = function (event) {
     textInputArray.push(timeData);
 
     localStorage.setItem("textInput", JSON.stringify(textInputArray));
+    console.log(textInputArray);
+    console.log(localStorage);
   }
 };
 
@@ -47,6 +49,7 @@ const constructTimeBlock = function (each) {
   } else {
     textareaClass = "textarea-present";
   }
+
   //render timeBlock
   const timeBlock = `<div class="card-container" id="card-container">
   <div class="hour-container">
@@ -63,6 +66,7 @@ const constructTimeBlock = function (each) {
   //append to main
   $(timeBlock).appendTo("#time-block-container");
 
+  $(".hour #textarea").val(localStorage.getItem("key"));
   // const textareaInput = function (item) {
   //   console.log(item.key, $("#textarea").data());
   //   // if (item.key === $("#textarea").data()) {
@@ -75,11 +79,12 @@ const constructTimeBlock = function (each) {
   // textInputArray.map(textareaInput);
 };
 
-const renderTimeBlocks = function () {
+const renderTimeBlocks = function (timeBlock) {
+  console.log($(timeBlock).parent());
+
   //map over the timeBlockLabels to construct each TimeBlock
   timeBlockLabels.map(constructTimeBlock);
 };
-console.log($("#timeBlockContainer"));
 // add a event listener click to save
 $("#time-block-container").on("click", onSave);
 
@@ -110,6 +115,8 @@ const onLoad = function () {
   renderClock();
 
   renderTimeBlocks();
+
+  $(".hour #textarea").val(localStorage.getItem("key"));
 };
 
 $(window).on("load", onLoad);

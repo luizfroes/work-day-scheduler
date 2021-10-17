@@ -108,7 +108,7 @@ body {
   padding: 7px 25px;
   text-decoration: none;
   text-shadow: 0px 1px 0px #2f6627;
-  margin-bottom: 0.5rem;
+  margin-top: 0.3rem;
 }
 
 .save-btn:hover {
@@ -169,9 +169,5 @@ body {
 
   .textarea-container {
     box-shadow: none;
-  }
-
-  .save-btn {
-    margin-bottom: 0px;
   }
 }
