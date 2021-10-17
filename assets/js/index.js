@@ -12,13 +12,11 @@ const timeBlockLabels = [
 
 const currentDay = $("#current-day");
 const clockContainer = $("#clock");
-const saveBtn = $("#save-btn");
 
-let textAreaContent = $("#textarea");
+let textAreaContent = $("#textarea").val();
 
 const getFromLocalStorage = function (key, defaultValue) {
   const localStorageData = JSON.parse(localStorage.getItem(key));
-  //console.log(localStorageData);
 
   if (!localStorageData) {
     return defaultValue;
@@ -35,15 +33,16 @@ const onSave = function (event) {
       key: target.attr("data-key"),
       textInput: $("#textarea").val(),
     };
+    console.log(timeData);
 
     //add to LS
-    const textInput = getFromLocalStorage("textInput", []);
+    const textInputArray = getFromLocalStorage("textInput", []);
 
-    textInput.push(timeData);
+    console.log(textInputArray);
+    textInputArray.push(timeData);
+    console.log(textInputArray);
 
-    console.log(textInput);
-
-    localStorage.setItem("textInput", JSON.stringify(timeData));
+    localStorage.setItem("textInput", JSON.stringify(textInputArray));
   }
 };
 
@@ -55,9 +54,21 @@ const onClear = function (event) {
   }
 };
 
-const constructTimeBlock = function (each) {
+const addTextInput = function (timeData) {
+  if (timeData.key === $("#textarea").data()) {
+    $("#textarea").text(timeData.textInput);
+    console.log(timeData.key, $("#textarea").data());
+    return textAreaContent;
+  }
+};
+
+const constructTimeBlock = function (each, textInputArray, timeData) {
   //get text from LS object
-  const textInput = getFromLocalStorage("textInput", []);
+  getFromLocalStorage("textInput", []);
+
+  addTextInput(timeData);
+
+  console.log(textInputArray);
 
   const currentTime = moment().format("HH");
 
@@ -80,7 +91,7 @@ const constructTimeBlock = function (each) {
     <h2 class="hour">${each.label}</h2>
   </div>
   <div class="${textareaClass}">
-    <textarea class="textarea" id="textarea"></textarea>
+    <textarea class="textarea" id="textarea" data-key="${each.key}"></textarea>
   </div>
   <div id="btn-container" class="btn-container">
     <button name="save-btn" id="save-btn" class="save-btn" data-key="${each.key}"><i name="save-icon" class="far fa-save" data="${each.key}"></i></i></button>
