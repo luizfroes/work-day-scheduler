@@ -25,16 +25,8 @@ You can view the GitHub pages deployed application [here](https://luizfroes.gith
 
 ### Layout Designs
 
-![alt text](assets/images/screenshot/quiz-game-application-sketch-1.png)
+![alt text](/assets/images/work-day-scheduler.png)
 
 ### Final Website
 
-![alt text](/assets/images/images/screenshot-quiz-main.png)
-
-![alt text](assets/images/images/screenshot-quiz-questions.png)
-
-![alt text](assets/images/images/screenshot-quiz-input.png)
-
-![alt text](assets/images/images/screenshot-quiz-game-over.png)
-
-![alt text](assets/images/images/screenshot-quiz-highscore.png)
+![alt text](assets/images/work-day-planer-webpage.png)
