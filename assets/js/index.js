@@ -13,17 +13,7 @@ const timeBlockLabels = [
 const currentDay = $("#current-day");
 const clockContainer = $("#clock");
 
-let textAreaContent = $("#textarea").val();
-
-const getFromLocalStorage = function (key, defaultValue) {
-  const localStorageData = JSON.parse(localStorage.getItem(key));
-
-  if (!localStorageData) {
-    return defaultValue;
-  } else {
-    return localStorageData;
-  }
-};
+const textInputArray = JSON.parse(localStorage.getItem("textInput")) || [];
 
 const onSave = function (event) {
   const target = $(event.target);
@@ -33,35 +23,15 @@ const onSave = function (event) {
       key: target.attr("data-key"),
       textInput: $("#textarea").val(),
     };
-    console.log(timeData);
 
     //add to LS
-    const textInputArray = getFromLocalStorage("textInput", []);
-
-    console.log(textInputArray);
     textInputArray.push(timeData);
-    console.log(textInputArray);
 
     localStorage.setItem("textInput", JSON.stringify(textInputArray));
   }
 };
 
-const addTextInput = function (timeData) {
-  if (timeData.key === $("#textarea").data()) {
-    $("#textarea").text(timeData.textInput);
-    console.log(timeData.key, $("#textarea").data());
-    return textAreaContent;
-  }
-};
-
-const constructTimeBlock = function (each, textInputArray, timeData) {
-  //get text from LS object
-  getFromLocalStorage("textInput", []);
-
-  addTextInput(timeData);
-
-  console.log(textInputArray);
-
+const constructTimeBlock = function (each) {
   const currentTime = moment().format("HH");
 
   const isPast = currentTime > each.key;
@@ -69,7 +39,7 @@ const constructTimeBlock = function (each, textInputArray, timeData) {
 
   let textareaClass;
 
-  // check if is past, future or present
+  // check if it is past, future or present
   if (isPast) {
     textareaClass = "textarea-container";
   } else if (isFuture) {
@@ -77,13 +47,13 @@ const constructTimeBlock = function (each, textInputArray, timeData) {
   } else {
     textareaClass = "textarea-present";
   }
-
+  //render timeBlock
   const timeBlock = `<div class="card-container" id="card-container">
   <div class="hour-container">
     <h2 class="hour">${each.label}</h2>
   </div>
   <div class="${textareaClass}">
-    <textarea class="textarea" id="textarea" data-key="${each.key}"></textarea>
+    <textarea class="textarea" id="textarea" data="${each.key}"></textarea>
   </div>
   <div id="btn-container" class="btn-container">
     <button name="save-btn" id="save-btn" class="save-btn" data-key="${each.key}"><i name="save-icon" class="far fa-save" data="${each.key}"></i></i></button>
@@ -92,13 +62,24 @@ const constructTimeBlock = function (each, textInputArray, timeData) {
 
   //append to main
   $(timeBlock).appendTo("#time-block-container");
+
+  const textareaInput = function (item) {
+    console.log(item.key, $("#textarea").data());
+    // if (item.key === $("#textarea").data()) {
+    //   $("#textarea").val(item.textInput);
+    //   console.log(item.key, $("#textarea").data());
+    //   return;
+    //}
+  };
+
+  textInputArray.map(textareaInput);
 };
 
 const renderTimeBlocks = function () {
-  //map over the timeBlockLabels[] (constructTimeBlock)
+  //map over the timeBlockLabels to construct each TimeBlock
   timeBlockLabels.map(constructTimeBlock);
 };
-
+console.log($("#timeBlockContainer"));
 // add a event listener click to save
 $("#time-block-container").on("click", onSave);
 
