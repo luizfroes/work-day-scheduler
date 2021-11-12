@@ -10,7 +10,7 @@ This is a flat and responsive calendar application that runs in the browser and 
 
 ## Deployed URL
 
-You can view the GitHub pages deployed application [here](https://luizfroes.github.io/timed-quiz-game/)
+You can view the GitHub pages deployed application [here](https://luizfroes.github.io/work-day-scheduler/)
 
 ## Technologies Used
 
