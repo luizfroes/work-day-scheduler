@@ -147,10 +147,6 @@ body {
   top: 1px;
 }
 
-/* tablet properties */
-@media screen and (max-width: 850px) and (min-width: 577px) {
-}
-
 /* mobile properties */
 @media screen and (max-width: 576px) {
   .card-container {

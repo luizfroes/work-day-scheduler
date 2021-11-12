@@ -13,11 +13,11 @@ const timeBlockLabels = [
 const currentDay = $("#current-day");
 const clockContainer = $("#clock");
 
-const getDataFromLS = function () {
+const getDataFromLS = () => {
   return JSON.parse(localStorage.getItem("textInput")) || {};
 };
 
-const onSave = function (event) {
+const onSave = (event) => {
   const target = $(event.target);
 
   if (
@@ -33,14 +33,14 @@ const onSave = function (event) {
   }
 };
 
-const getTextAreaValue = function (key) {
+const getTextAreaValue = (key) => {
   // get all data from LS
   const data = getDataFromLS();
 
   return data[key];
 };
 
-const getClassName = function (key) {
+const getClassName = (key) => {
   const currentTime = moment().hour();
 
   const isPast = currentTime > key;
@@ -56,30 +56,30 @@ const getClassName = function (key) {
   }
 };
 
-const constructTimeBlocks = function (each) {
-  //render timeBlock
-  const timeBlock = `<div class="card-container" id="card-container">
-    <div class="hour-container">
-      <h2 class="hour">${each.label}</h2>
-    </div>
-    <div class="${getClassName(each.key)}">
-      <textarea class="textarea" id=${each.key} data="${each.key}">${
-    getTextAreaValue(each.key) || ""
-  }</textarea>
-    </div>
-    <div id="btn-container" class="btn-container">
-      <button name="save-btn" id=${
-        each.key
-      } class="save-btn"><i name="save-icon" id=${
-    each.key
-  } class="far fa-save"></i></i></button>
-    </div>
-  </div>`;
+const renderTimeBlocks = () => {
+  const constructTimeBlocks = (each) => {
+    //render timeBlock
+    const timeBlock = `<div class="card-container" id="card-container">
+      <div class="hour-container">
+        <h2 class="hour">${each.label}</h2>
+      </div>
+      <div class="${getClassName(each.key)}">
+        <textarea class="textarea" id=${each.key} data="${each.key}">${
+      getTextAreaValue(each.key) || ""
+    }</textarea>
+      </div>
+      <div id="btn-container" class="btn-container">
+        <button name="save-btn" id=${
+          each.key
+        } class="save-btn"><i name="save-icon" id=${
+      each.key
+    } class="far fa-save"></i></i></button>
+      </div>
+    </div>`;
 
-  return timeBlock;
-};
+    return timeBlock;
+  };
 
-const renderTimeBlocks = function () {
   //map over the timeBlockLabels to construct each TimeBlock
   const timeBlocks = timeBlockLabels.map(constructTimeBlocks).join("");
 
@@ -87,19 +87,19 @@ const renderTimeBlocks = function () {
   $("#time-block-container").append(timeBlocks);
 };
 
-const renderCurrentDay = function () {
+const renderCurrentDay = () => {
   currentDay.text(moment().format("dddd MMMM Do YYYY"));
 };
 
-const setClock = function () {
+const setClock = () => {
   clockContainer.text(moment().format("kk:mm:ss"));
 };
 
-const renderClock = function () {
+const renderClock = () => {
   setInterval(setClock, 1000);
 };
 
-const onLoad = function () {
+const onLoad = () => {
   renderCurrentDay();
 
   setClock();
@@ -109,7 +109,7 @@ const onLoad = function () {
   renderTimeBlocks();
 };
 
-const onClear = function () {
+const onClear = () => {
   localStorage.clear();
 
   $("#time-block-container").empty();
